@@ -178,7 +178,7 @@ function App() {
                     {data.product.nutriscore.toUpperCase()}
                   </div>
 
-                  <div className="flex flex-col items-start w-full">
+                  <div >
                     <NutriscoreGuide currentScore={data.product.nutriscore} />
                   </div>
                 </div>

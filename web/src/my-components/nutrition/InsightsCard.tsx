@@ -31,7 +31,7 @@ export const InsightsCard: React.FC<Props> = ({ insights, ingredient_analysis })
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-6">
+    <div className="mb-10 last:mb-0">
       <div className="bg-white shadow-xl rounded-[2rem] overflow-hidden border border-gray-100">
         
         {/* Header Section: Responsive Flex */}

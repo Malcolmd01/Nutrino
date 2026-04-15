@@ -29,12 +29,12 @@ export const NutriscoreGuide = ({ currentScore }: { currentScore?: string }) => 
         </button>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className=" h-svh ">
         <DialogHeader>
           <DialogTitle className="text-xl">Nutri-Score Guide</DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-5 py-2">
+        <div className="space-y-5 py-2 overflow-y-scroll ">
           <div className="bg-gray-50 p-5 rounded-2xl border">
             <p className="text-sm text-gray-600 mb-1">Current Rating</p>
             <div className="flex items-center gap-4">
@@ -56,7 +56,7 @@ export const NutriscoreGuide = ({ currentScore }: { currentScore?: string }) => 
           </div>
 
           {/* Legend Table */}
-          <div className="space-y-3">
+          <div className="space-y-3 mx-1">
             <p className="text-sm font-semibold text-gray-700 px-1">Score Breakdown</p>
             <div className="grid gap-2">
               {nutriscoreTiers.map((tier) => (
