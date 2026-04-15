@@ -33,14 +33,14 @@ export const InsightsCard: React.FC<Props> = ({ insights, ingredient_analysis })
   return (
     <div className="mb-10 last:mb-0">
       <div className="bg-white shadow-xl rounded-[2rem] overflow-hidden border border-gray-100">
-        
+
         {/* Header Section: Responsive Flex */}
         <div className="bg-gray-50/80 px-6 py-5 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">Product Insights</h2>
             <p className="text-xs md:text-sm text-gray-500 font-medium">Nutritional & Ingredient Analysis</p>
           </div>
-          
+
           <div className="flex flex-wrap gap-2">
             {totalWarnings > 0 && (
               <div className="px-3 py-1.5 rounded-xl bg-red-600 text-white text-[11px] font-bold uppercase tracking-wider shadow-lg shadow-red-200">
@@ -48,11 +48,11 @@ export const InsightsCard: React.FC<Props> = ({ insights, ingredient_analysis })
               </div>
             )}
             {totalPositives > 0 && (
-            <div className="px-3 py-1.5 rounded-xl bg-green-600 text-white text-[11px] font-bold uppercase tracking-wider shadow-lg shadow-green-200">
-              {totalPositives} Benefits
+              <div className="px-3 py-1.5 rounded-xl bg-green-600 text-white text-[11px] font-bold uppercase tracking-wider shadow-lg shadow-green-200">
+                {totalPositives} Benefits
               </div>
             )}
-            </div>
+          </div>
         </div>
 
         <div className="p-5 md:p-8">
@@ -68,8 +68,8 @@ export const InsightsCard: React.FC<Props> = ({ insights, ingredient_analysis })
             )}
           </div>
 
-          <div className={`grid grid-cols-1 ${(totalWarnings && totalPositives)??'lg:grid-cols-2'} gap-8 lg:gap-12`}>
-            
+          <div className={`grid grid-cols-1 ${(totalWarnings && totalPositives) ?? 'lg:grid-cols-2'} gap-8 lg:gap-12`}>
+
             {/* CONS SECTION */}
             <section className="order-1">
               <div className="flex items-center gap-2 mb-5 border-b border-red-50 pb-2">
@@ -79,39 +79,39 @@ export const InsightsCard: React.FC<Props> = ({ insights, ingredient_analysis })
                   {totalWarnings}
                 </span>
               </div>
-              
+
               {totalWarnings > 0 && (
                 <div className="space-y-3">
-                {insights.warnings.map((msg, i) => (
-                  <WarningItem key={`nut-warn-${i}`} message={msg} type="Nutrition" severity="high" />
-                ))}
-                {warnings.map((item, i) => (
-                  <WarningItem key={`ing-warn-${i}`} message={item.message} type="Ingredient" severity={item.severity || "medium"} />
-                ))}
-              </div>
+                  {insights.warnings.map((msg, i) => (
+                    <WarningItem key={`nut-warn-${i}`} message={msg} type="Nutrition" severity="high" />
+                  ))}
+                  {warnings.map((item, i) => (
+                    <WarningItem key={`ing-warn-${i}`} message={item.message} type="Ingredient" severity={item.severity || "medium"} />
+                  ))}
+                </div>
               )}
             </section>
 
             {/* PROS SECTION */}
-           {totalPositives > 0 && (
-             <section className="order-2 lg:order-2">
-              <div className="flex items-center gap-2 mb-5 border-b border-emerald-50 pb-2">
-                <CheckCircle2 className="text-emerald-500" size={20} />
-                <h3 className="text-lg font-bold text-gray-800">Health Benefits</h3>
-                <span className="ml-auto text-xs font-bold text-emerald-400 bg-emerald-50 px-2 py-0.5 rounded-md leading-none">
-                  {totalPositives}
-                </span>
-              </div>
-              
-              <div className="space-y-3">
-                {insights.positives.map((msg, i) => (
-                  <PositiveItem key={`nut-pos-${i}`} message={msg} type="Nutrition" />
-                ))}
-                {positives.map((item, i) => (
-                  <PositiveItem key={`ing-pos-${i}`} message={item.message} type="Ingredient" />
-                ))}
-              </div>
-             </section>
+            {totalPositives > 0 && (
+              <section className="order-2 lg:order-2">
+                <div className="flex items-center gap-2 mb-5 border-b border-emerald-50 pb-2">
+                  <CheckCircle2 className="text-emerald-500" size={20} />
+                  <h3 className="text-lg font-bold text-gray-800">Health Benefits</h3>
+                  <span className="ml-auto text-xs font-bold text-emerald-400 bg-emerald-50 px-2 py-0.5 rounded-md leading-none">
+                    {totalPositives}
+                  </span>
+                </div>
+
+                <div className="space-y-3">
+                  {insights.positives.map((msg, i) => (
+                    <PositiveItem key={`nut-pos-${i}`} message={msg} type="Nutrition" />
+                  ))}
+                  {positives.map((item, i) => (
+                    <PositiveItem key={`ing-pos-${i}`} message={item.message} type="Ingredient" />
+                  ))}
+                </div>
+              </section>
             )}
           </div>
         </div>
@@ -131,8 +131,8 @@ const WarningItem = ({ message, severity, type }: { message: string, severity: s
     <div className={`flex items-start gap-3 p-4 rounded-2xl border transition-all hover:translate-x-1 ${styles}`}>
       <AlertCircle className="shrink-0 mt-1 opacity-60" size={18} />
       <div className="flex flex-col">
-        <span className="text-[9px] font-black uppercase tracking-[0.15em] opacity-40 mb-1">
-            {type} 
+        <span className="text-[10px] font-black uppercase tracking-[0.15em] opacity-90 mb-1">
+          {type}
         </span>
         <p className="text-[14px] md:text-[15px] leading-snug font-medium tracking-tight">
           {message}
@@ -142,12 +142,12 @@ const WarningItem = ({ message, severity, type }: { message: string, severity: s
   );
 }
 
-const PositiveItem = ({ message, type  }: { message: string, type: string }) => (
+const PositiveItem = ({ message, type }: { message: string, type: string }) => (
   <div className="flex items-start gap-3 p-4 rounded-2xl border border-emerald-100 bg-emerald-50 text-emerald-900 transition-all hover:translate-x-1 shadow-sm shadow-emerald-100/20">
-    <CheckCircle2 className="shrink-0 mt-1 text-emerald-500" size={18} />    
+    <CheckCircle2 className="shrink-0 mt-1 text-emerald-500" size={18} />
     <div className="flex flex-col">
       <span className="text-[9px] font-black uppercase tracking-[0.15em] opacity-40 mb-1">
-            {type} 
+        {type}
       </span>
       <p className="text-[14px] md:text-[15px] leading-snug font-medium tracking-tight">
         {message}

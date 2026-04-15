@@ -5,9 +5,9 @@ import { InsightsCard } from "./my-components/nutrition/InsightsCard";
 import { BarcodeScanner } from "./my-components/BarcodeScanner";
 import { Input } from "../components/ui/input";
 import { Button } from "../components/ui/button";
-import { X, Scan, Search, Camera } from "lucide-react";
+import { X, Search, Camera } from "lucide-react";
 import { toast } from "sonner";
-import { NutriscoreGuide } from "./my-components/nutrition/nutriscore";
+import { NutriscoreGuide, NutriscorePopup } from "./my-components/nutrition/nutriscore";
 
 function App() {
   const [inputValue, setInputValue] = useState("");
@@ -73,8 +73,7 @@ function App() {
         </div>
 
         {/* Search Input Section */}
-      <div className="max-w-xl mx-auto mb-12 bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
-        {/* Input on top - full width */}
+        <div className="max-w-xl mx-auto mb-12 bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
           <div className="relative mb-4">
             <Input
               placeholder="Enter barcode number..."
@@ -82,9 +81,9 @@ function App() {
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSearch()}
               className={`${isLoading || scanLoading ? "opacity-50 pointer-events-none" : "opacity-100"} h-14 text-lg pl-6 pr-12 rounded-2xl border-gray-200 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500`}
-              disabled={(isLoading || scanLoading) }
+              disabled={(isLoading || scanLoading)}
             />
-            
+
             {inputValue && (
               <button
                 onClick={() => setInputValue("")}
@@ -97,9 +96,9 @@ function App() {
           </div>
 
           <div className="flex gap-3">
-            <Button 
+            <Button
               onClick={handleSearch}
-              disabled={(isLoading || scanLoading)  || !inputValue.trim()}
+              disabled={(isLoading || scanLoading) || !inputValue.trim()}
               className={`${isLoading || scanLoading ? "opacity-50 pointer-events-none" : "opacity-100"} flex-1 h-14 rounded-2xl font-semibold bg-indigo-600 hover:bg-indigo-700`}
             >
               <Search className="mr-2" size={20} />
@@ -109,7 +108,7 @@ function App() {
             <Button
               variant="outline"
               onClick={() => setShowScanner(!showScanner)}
-              disabled={(isLoading || scanLoading) }
+              disabled={(isLoading || scanLoading)}
               className={`${isLoading || scanLoading ? "opacity-50 pointer-events-none" : "opacity-100"} h-14 px-8 rounded-2xl border-2 border-gray-300 hover:bg-gray-50 flex items-center gap-2`}
             >
               <Camera size={20} />
@@ -179,21 +178,21 @@ function App() {
                   </div>
 
                   <div >
-                    <NutriscoreGuide currentScore={data.product.nutriscore} />
+                    <NutriscorePopup currentScore={data.product.nutriscore} />
                   </div>
                 </div>
               )}
             </div>
 
             {/* Insights */}
-            <InsightsCard 
-              insights={data.insights} 
-              ingredient_analysis={data.ingredient_analysis} 
+            <InsightsCard
+              insights={data.insights}
+              ingredient_analysis={data.ingredient_analysis}
             />
 
             {/* Nutrition */}
-            <NutritionCard 
-              analysis={data.analysis} 
+            <NutritionCard
+              analysis={data.analysis}
               energy={data.energy}
             />
 
@@ -202,24 +201,46 @@ function App() {
             </p>
           </div>
         )}
-        
+
 
         {/* Empty State */}
         {!data && !isLoading && !error && !showScanner && (
-          <div className="text-center py-20">
-            <div className="mx-auto w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-6">
-              <Scan size={32} className="text-gray-400" />
+          <div className="text-center max-w-xl mx-auto mb-12 bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+            
+            <div className="mb-8">
+              <h3 className="text-2xl font-bold text-gray-800">Welcome to Nutrino</h3>
+              <p className="text-gray-500 mt-2">Get instant nutritional clarity in three simple steps.</p>
             </div>
-            <h3 className="text-xl font-semibold text-gray-700">Ready to scan?</h3>
-            <p className="text-gray-500 mt-2 max-w-xs mx-auto">
-              Enter a barcode or use the camera to get instant nutrition insights
-            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              
+              <div className="bg-emerald-50 p-6 rounded-2xl border border-emerald-100 flex flex-col items-center">
+                <img src="/chipsbagzoom.png" alt="Find" className="w-24 h-24 mb-4 object-contain" />
+                <p className="text-sm font-medium text-emerald-900 text-center">Find the barcode on the product</p>
+              </div>
+
+              <div className="bg-emerald-50 p-6 rounded-2xl border border-emerald-100 flex flex-col items-center">
+                <img src="/scanner.png" alt="Scan" className="w-24 h-24 mb-4 object-contain" />
+                <p className="text-sm font-medium text-emerald-900 leading-snug">
+                  Scan it using the Scan option or 
+                    <span className="text-emerald-600 font-bold">type it manually</span>
+                </p>              
+              </div>
+
+              <div className="bg-emerald-50 p-6 rounded-2xl border border-emerald-100 flex flex-col items-center">
+                <img src="/info.png" alt="Info" className="w-24 h-24 mb-4 object-contain" />
+                <p className="text-sm font-medium text-emerald-900 text-center">Get all the Nutritional info</p>
+              </div>
+
+            </div>
           </div>
         )}
+
+        <NutriscoreGuide />
       </div>
-      
+
     </div>
-    
+
   );
 }
 

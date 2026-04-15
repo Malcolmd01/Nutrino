@@ -113,22 +113,21 @@ const startScanner = async () => {
 
       let userMessage = "Failed to start camera scanner";
 
-      if (err.name === "NotAllowedError" || err.message.includes("Permission")) {
+      if (err.name === "NotAllowedError" || err.message?.includes("Permission")) {
         userMessage = "Camera permission denied. Please allow camera access in your browser settings.";
-      } else if (err.name === "NotFoundError" || err.message.includes("No camera")) {
+      } else if (err.name === "NotFoundError" || err.message?.includes("No camera")) {
         userMessage = "No camera detected on this device.";
       } else if (err.name === "NotReadableError") {
         userMessage = "Camera is being used by another app or tab. Close other apps and try again.";
-      } else if (err.message.includes("HTTPS")) {
+      } else if (err.message?.includes("HTTPS")) {
         userMessage = err.message;
-      } else if (err.message.includes("iOS") || err.message.includes("Safari")) {
+      } else if (err.message?.includes("iOS") || err.message?.includes("Safari")) {
         userMessage = "iOS/Safari camera issues are common. Try refreshing or using Chrome on iOS.";
       }
 
       setErrorMessage(userMessage);
       toast.error(userMessage);
 
-      // Fallback: offer image upload in future (we can add later)
   } finally {
       setTimeout(() => {
     setScanLoading(false);
