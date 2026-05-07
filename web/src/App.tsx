@@ -246,7 +246,7 @@ function App() {
                 {[
                   { code: "3017620422003", name: "Nutella" },
                   { code: "8901499010513", name: "Muesli kellogs" },
-                  { code: "8909081005053", name: "Dark Fantasy  " },
+                  { code: "8906009531533", name: "Max Protein bar " },
                   { code: "8901491101813", name: "Lays" },
                 ].map((item) => (
                   <button
