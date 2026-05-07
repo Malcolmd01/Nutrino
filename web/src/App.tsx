@@ -18,6 +18,10 @@ function App() {
 
   const { data, isLoading, error } = useProduct(barcode);
 
+  useEffect(() => {
+  window.scrollTo(0, 0)
+  }, [data])
+
   const handleSearch = () => {
     const trimmed = inputValue.trim();
     if (!trimmed) {
@@ -222,8 +226,7 @@ function App() {
               <div className="bg-emerald-50 p-6 rounded-2xl border border-emerald-100 flex flex-col items-center">
                 <img src="/scanner.png" alt="Scan" className="w-24 h-24 mb-4 object-contain" />
                 <p className="text-sm font-medium text-emerald-900 leading-snug">
-                  Scan it using the Scan option or 
-                    <span className="text-emerald-600 font-bold">type it manually</span>
+                  Scan it using the Scan option or <span className="text-black font-bold"> type it manually</span>
                 </p>              
               </div>
 
@@ -236,6 +239,34 @@ function App() {
           </div>
         )}
 
+        <div className="max-w-xl mx-auto mt-10 mb-12 bg-white p-6 rounded-3xl shadow-sm border border-gray-100">
+          <div className="space-y-3 mx-1">
+            <p className="text-lg text-center font-bold text-gray-700 px-1 py-3">Try these example barcodes</p>
+            <div className="grid grid-cols-2 gap-3">
+                {[
+                  { code: "3017620422003", name: "Nutella" },
+                  { code: "8901499010513", name: "Muesli kellogs" },
+                  { code: "8909081005053", name: "Dark Fantasy  " },
+                  { code: "8901491101813", name: "Lays" },
+                ].map((item) => (
+                  <button
+                    key={item.code}
+                    onClick={() => {
+                      setInputValue(item.code);
+                      setBarcode(item.code);
+                      toast.success(`Loaded ${item.name}`);
+                    }}
+                    className="group border border-gray-200 hover:border-indigo-300 hover:shadow-md transition-all rounded-2xl p-3 text-left active:scale-95"
+                  >
+                    <div className="font-mono text-sm font-semibold text-gray-800 mb-1">
+                      {item.code}
+                    </div>
+                    <div className="text-sm font-bold">{item.name}</div>
+                  </button>
+                ))}
+              </div>
+          </div>
+        </div>
         <NutriscoreGuide />
       </div>
 
